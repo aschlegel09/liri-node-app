@@ -4,6 +4,10 @@ var request = require("request");
 
 var fs = require("fs");
 
+var logger = fs.createWriteStream('log.txt', {
+  flags: 'a' // 'a' means appending (old data will be preserved)
+})
+
 var myKeys = require("./keys.js");
 
 var Spotify = require("node-spotify-api");
@@ -48,6 +52,8 @@ else {
   console.log("Please enter a search term.");
 }
 
+// logger.write("\n" + userQuery + userInput);
+
 printMovie = function() {
   request(
     "https://www.omdbapi.com/?t=" + userQuery + "&y=&plot=short&apikey=trilogy",
@@ -68,6 +74,9 @@ printMovie = function() {
       console.log("Language: " + parsedString.Language);
       console.log("Plot: " + parsedString.Plot);
       console.log("Actors: " + parsedString.Actors);
+      logger.write("\n" + "----------")
+      logger.write("\n" + userInput + " " + userQuery);
+      logger.write("\n" + parsedString.Title + ", " + parsedString.Year + ", " + parsedString.imdbRating + ", " + parsedString.Ratings[1].Value + ", " +  parsedString.Country + ", " + parsedString.Language + ", " + parsedString.Plot + ", " + parsedString.Actors);
     }
   );
 };
@@ -81,17 +90,14 @@ printSong = function() {
       if (err) {
         return console.log("Song Error: " + err);
       }
-      console.log(
-        "The artist is: " + data.tracks.items[0].album.artists[0].name
-      );
-      console.log("The song is called: " + data.tracks.items[0].name);
-      console.log(
-        "Follow this link to play your song: " +
-          data.tracks.items[0].external_urls.spotify
-      );
-      console.log(
-        "The title of this album is " + data.tracks.items[0].album.name
-      );
+      var songItem = data.tracks.items[0];
+      console.log("The artist is: " + songItem.album.artists[0].name);
+      console.log("The song is called: " + songItem.name);
+      console.log("Follow this link to play your song: " + songItem.external_urls.spotify);
+      console.log("The title of this album is " + songItem.album.name);
+      logger.write("\n" + "----------")
+      logger.write("\n" + userInput + " " + userQuery);
+      logger.write("\n" + songItem.album.artists[0].name + ", " + songItem.name + ", " + songItem.external_urls.spotify + ", " + songItem.album.name);
     });
   }
 };
@@ -105,7 +111,7 @@ printBand = function() {
     userQuery +
     "/events?app_id=codingbootcamp";
 
-  // This line is just to help us debug against the actual URL.
+  // This line is just to help debug against the actual URL.
   // console.log(bandUrl);
 
   request(bandUrl, function(error, response, body) {
@@ -120,10 +126,12 @@ printBand = function() {
     console.log("Country: " + concerts[0].venue.country);
 
     var dateOfConcert = concerts[0].datetime;
-
     var momentDate = moment(dateOfConcert).format("MM/DD/YYYY");
-
     console.log("Date of Concert: " + momentDate);
+
+    logger.write("\n" + "----------")
+    logger.write("\n" + userInput + " " + userQuery);
+    logger.write("\n" + concerts[0].venue.name + ", " + concerts[0].venue.city + ", " + concerts[0].venue.region + ", " + concerts[0].venue.country + ", " + momentDate);
   });
 };
 
