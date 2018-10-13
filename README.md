@@ -13,7 +13,7 @@ There are four steps you can take from there:<br>
 "spotify-this-song" "[song]"<br>
 "movie-this "[movie]"<br>
 "concert-this" "[artist]"<br>
-"do-what-i-say" --- this returns a default program<br>
+"do-what-it-says" --- this returns a default program<br>
   if your do not specify a movie title or a song name, defaults will be given 
 
 *All of this information is then logged into the log.txt file
