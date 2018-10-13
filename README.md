@@ -9,11 +9,11 @@ You can find links to play songs directly from this app, find plots for your fav
 Begin by typing 'npm install' into your command line to install the necessary packages.
 Once that's finsihed, start writing your command by beginning every command line phrase with 'node'
 Access this file directly by calling 'liri'
-There are four steps you can take from there:
-"spotify-this-song" "<song>"
-"movie-this "<movie>"
-"concert-this" "<artist>"
-"do-what-i-say" --- this returns a default program
+There are four steps you can take from there:<br>
+"spotify-this-song" "[song]"<br>
+"movie-this "[movie]"<br>
+"concert-this" "[artist]"<br>
+"do-what-i-say" --- this returns a default program<br>
   if your do not specify a movie title or a song name, defaults will be given 
 
 *All of this information is then logged into the log.txt file
