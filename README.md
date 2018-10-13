@@ -17,3 +17,5 @@ There are four steps you can take from there:<br>
   if your do not specify a movie title or a song name, defaults will be given 
 
 *All of this information is then logged into the log.txt file
+
+Here's a link for a video tutorial: https://drive.google.com/file/d/1GgSNPXy50ocoh8grXUg02NRgMV6caVOc/view
